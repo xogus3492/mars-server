@@ -1,6 +1,7 @@
 package mars18.restapi.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mars18.restapi.dto.MemberLoginDto;
 import mars18.restapi.dto.MemberRegisterDto;
 import mars18.restapi.entity.Member;
@@ -17,13 +18,16 @@ import static mars18.restapi.model.StatusTrue.REGISTER_STATUS_TRUE;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
     //private final PasswordEncoder passwordEncoder;
-    /*@Transactional
+
+    @Transactional
     public Constable registerMember(MemberRegisterDto.Request request) {
-        //REGISTER_VALIDATION(request);
+        REGISTER_VALIDATION(request);
 
         memberRepository.save(
                 Member.builder()
@@ -34,27 +38,6 @@ public class MemberService {
         );
 
          return REGISTER_STATUS_TRUE;
-    }*/
-
-    @Transactional
-    public MemberRegisterDto.Response registerMember(MemberRegisterDto.Request request) {
-        return MemberRegisterDto.Response.entityResponse(
-                memberRepository.save(
-                        Member.builder()
-                                .name(request.getName())
-                                .email(request.getEmail())
-                                .pw(request.getPw())
-                                .build()
-                )
-        );
-    }
-
-    public Member loginMember(MemberLoginDto.Request request) {
-        return memberRepository.findByEmailAndPw(
-                request.getEmail(), request.getPw()
-        ).orElseThrow(
-                () -> new RuntimeException("로그인 실패")
-        );
     }
 
     // validate 단순화

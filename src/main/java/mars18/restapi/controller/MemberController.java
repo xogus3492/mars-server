@@ -18,11 +18,8 @@ import java.lang.constant.Constable;
 public class MemberController {
     private final MemberService memberService;
 
-    //POST로 유저 추가
     @PostMapping("register")
-    public MemberRegisterDto.Response registerMember(
-            @Valid @RequestBody final MemberRegisterDto.Request request
-    ) {
+    public Constable registerMember(@Valid @RequestBody final MemberRegisterDto.Request request) {
         return memberService.registerMember(request);
     }
 }
