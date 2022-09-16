@@ -2,16 +2,18 @@ package mars18.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mars18.restapi.dto.MemberLoginDto;
-import mars18.restapi.dto.MemberRegisterDto;
-import mars18.restapi.entity.Member;
+import mars18.restapi.dto.UserLoginDto;
+import mars18.restapi.dto.UserRegisterDto;
+import mars18.restapi.entity.User;
 import mars18.restapi.exception.CustomException;
-import mars18.restapi.repository.MemberRepository;
+import mars18.restapi.repository.UserRepository;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.lang.constant.Constable;
+import java.util.HashMap;
+import java.util.Map;
 
 import static mars18.restapi.exception.CustomErrorCode.*;
 import static mars18.restapi.model.StatusTrue.REGISTER_STATUS_TRUE;
@@ -19,18 +21,18 @@ import static mars18.restapi.model.StatusTrue.REGISTER_STATUS_TRUE;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberService {
+public class UserService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     //private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Constable registerMember(MemberRegisterDto.Request request) {
+    public Constable registerUser(UserRegisterDto.Request request) {
         REGISTER_VALIDATION(request);
 
-        memberRepository.save(
-                Member.builder()
+        userRepository.save(
+                User.builder()
                         .name(request.getName())
                         .email(request.getEmail())
                         .pw(request.getPw())
@@ -40,13 +42,24 @@ public class MemberService {
          return REGISTER_STATUS_TRUE;
     }
 
-    // validate 단순화
+    @Transactional
+    public Map<Object, Object> loginUser(UserLoginDto.Request request) {
+        LOGIN_VALIDATION(request);
 
-    private void REGISTER_VALIDATION(MemberRegisterDto.Request request) {
+        Map<Object, Object> name = new HashMap<>();
+        name.put("name", userRepository.findNameByEmail(request.getEmail()).getName());
+
+        return name;
+    }
+
+    // validate 처리
+
+    // 회원가입 예외
+    private void REGISTER_VALIDATION(UserRegisterDto.Request request) {
         if (request.getEmail() == null || request.getPw() == null || request.getName() == null)
             throw new CustomException(REGISTER_INFO_NULL); // 필수 항목
 
-        if (memberRepository.existsByEmail(request.getEmail()))
+        if (userRepository.existsByEmail(request.getEmail()))
             throw new CustomException(DUPLICATE_USER_EMAIL); // 이메일중복
 
         if (!request.getEmail().contains("@"))
@@ -63,7 +76,23 @@ public class MemberService {
             throw new CustomException(NOT_CONTAINS_EXCLAMATIONMARK); // 특수 기호 포함
         }
 
-        if (memberRepository.existsByName(request.getName()))
+        if (userRepository.existsByName(request.getName()))
             throw new CustomException(DUPLICATE_USER_NAME);
         }
+
+        //로그인 예외
+        private void LOGIN_VALIDATION(UserLoginDto.Request request) {
+            if (request.getEmail() == null)
+                throw new CustomException(LOGIN_EMAIL_NULL); // 이메일 입력X
+
+            if (request.getPw() == null)
+                throw new CustomException(LOGIN_PW_NULL); // 패스워드 입력X
+
+            if (!(request.getEmail().contains("@")))
+                throw new CustomException(NOT_EMAIL_FORM); // 이메일 형식
+
+            if (!(userRepository.existsByEmail(request.getEmail())) || !(userRepository.existsByPw(request.getPw())))
+                throw new CustomException(NOT_EMAIL_OR_PW); // 아이디 또는 패스 또는 둘다 일치X
+        }
+
 }

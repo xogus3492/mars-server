@@ -2,7 +2,7 @@ package mars18.restapi.dto;
 
 import lombok.*;
 
-public class MemberRegisterDto {
+public class UserRegisterDto {
     @Getter
     @Setter
     @AllArgsConstructor
@@ -14,7 +14,7 @@ public class MemberRegisterDto {
         private String pw;
     }
 
-    @Getter
+    /*@Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
@@ -22,5 +22,5 @@ public class MemberRegisterDto {
     public static class Response{
         private String name;
         private String email;
-    }
+    }*/
 }

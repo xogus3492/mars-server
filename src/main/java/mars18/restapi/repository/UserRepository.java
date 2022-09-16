@@ -1,19 +1,14 @@
 package mars18.restapi.repository;
 
-import mars18.restapi.entity.Member;
+import mars18.restapi.dto.UserLoginDto;
+import mars18.restapi.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
-
-    Optional<Member> findByEmailAndPw(String email, String pw);
-
+public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
-
+    Boolean existsByPw(String pw);
     Boolean existsByName(String name);
-
-
+    User findNameByEmail(String email);
 }

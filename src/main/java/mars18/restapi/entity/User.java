@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Member {
+public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
