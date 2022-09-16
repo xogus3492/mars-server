@@ -14,13 +14,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class PlayRecord { // 칼럼 순서 커스텀 방법
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String email;
-    private String pw;
     private String name;
+    private int score;
+    private String playing_time;
+    private String kind;
 
     @CreatedDate
     private LocalDateTime createAt;

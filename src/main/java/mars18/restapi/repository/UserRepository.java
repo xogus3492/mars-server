@@ -1,6 +1,5 @@
 package mars18.restapi.repository;
 
-import mars18.restapi.dto.UserLoginDto;
 import mars18.restapi.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

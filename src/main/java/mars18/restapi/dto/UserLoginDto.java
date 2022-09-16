@@ -10,9 +10,7 @@ public class UserLoginDto {
     @NoArgsConstructor
     @Builder
     public static class Request{
-        @NotNull
         private String email;
-        @NotNull
         private String pw;
     }
 

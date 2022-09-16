@@ -13,10 +13,4 @@ public class CustomException extends RuntimeException{ // runtimeException ìƒì†
         this.customErrorCode = customErrorCode;
         this.detaliMessage = customErrorCode.getStatusMessage();
     }
-
-    public CustomException(CustomErrorCode customErrorCode, String detaliMessage){
-        super(detaliMessage); // runtimeException
-        this.customErrorCode = customErrorCode;
-        this.detaliMessage = detaliMessage;
-    }
 }

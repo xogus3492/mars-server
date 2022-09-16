@@ -17,7 +17,11 @@ public enum CustomErrorCode {
     // 로그인
     LOGIN_EMAIL_NULL("아이디를 입력해 주세요"),
     LOGIN_PW_NULL("패스워드를 입력해 주세요"),
-    NOT_EMAIL_OR_PW("아이디 또는 패스워드가 일치하지 않습니다.");
+    NOT_EMAIL_OR_PW("아이디 또는 패스워드가 일치하지 않습니다."),
+
+    // 플레이 기록
+    NULL_USER_NAME("유저 이름을 입력하세요.");
+
 
 
 
