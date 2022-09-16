@@ -13,14 +13,4 @@ public class UserRegisterDto {
         private String email;
         private String pw;
     }
-
-    /*@Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public static class Response{
-        private String name;
-        private String email;
-    }*/
 }

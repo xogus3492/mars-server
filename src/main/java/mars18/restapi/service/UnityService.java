@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.lang.constant.Constable;
 
+import static mars18.restapi.exception.CustomErrorCode.NULL_USER_NAME;
 import static mars18.restapi.exception.CustomErrorCode.REGISTER_INFO_NULL;
 import static mars18.restapi.model.StatusTrue.RECORD_STATUS_TRUE;
 
@@ -41,6 +42,6 @@ public class UnityService {
 
     private void PLAYRECORD_VALIDATION(UnityDto.Request request) {
         if (request.getName() == null)
-            throw new CustomException(REGISTER_INFO_NULL); // 이름 비었을 때
+            throw new CustomException(NULL_USER_NAME); // 이름 비었을 때
     }
 }

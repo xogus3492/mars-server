@@ -1,6 +1,5 @@
 package mars18.restapi.dto;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 public class UserLoginDto {
