@@ -23,11 +23,10 @@ public enum CustomErrorCode {
     NULL_USER_NAME("유저 이름을 입력하세요."),
 
     // 앱 - 피드백 탭
-    NO_EXISTS_USER_NAME("유저 이름이 존재하지 않습니다");
+    NOT_EXISTS_USER_RECORD("유저의 플레이 기록이 존재하지 않습니다"),
 
-
-
-
+    // 랭킹
+    NOT_EXISTS_PLAY_RECORD("플레이 기록이 없습니다.");
 
     private final String statusMessage;
 }

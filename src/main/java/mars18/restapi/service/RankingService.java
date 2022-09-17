@@ -2,6 +2,8 @@ package mars18.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mars18.restapi.dto.AppFeedbackDto;
+import mars18.restapi.exception.CustomException;
 import mars18.restapi.repository.UnityRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static mars18.restapi.exception.CustomErrorCode.*;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -20,7 +24,7 @@ public class RankingService {
     private final UnityRepository unityRepository;
     @Transactional
     public List<Map<Object, Object>> rankingData() {
-        //FEEDBACKTAP_VALIDATION(request);
+        RANKING_VALIDATION();
 
         List<Map<Object, Object>> list = new ArrayList<>();
 
@@ -37,5 +41,12 @@ public class RankingService {
         }
 
         return list;
+    }
+
+    // 예외 처리
+
+    private void RANKING_VALIDATION() {
+        if (unityRepository.count() == 0)
+            throw new CustomException(NOT_EXISTS_PLAY_RECORD); // 플레이 기록이 없음
     }
 }

@@ -44,6 +44,6 @@ public class AppService {
         throw new CustomException(NULL_USER_NAME); // 이름 비었을 때 (처리 안되는 이유?)
 
         if (!(unityRepository.existsNameByNameOrderByIdDesc(request.getName())))
-            throw new CustomException(NO_EXISTS_USER_NAME); // 유저 이름이 없을 때
+            throw new CustomException(NOT_EXISTS_USER_RECORD); // 유저 이름이 없을 때
     }
 }
