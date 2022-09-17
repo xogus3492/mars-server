@@ -56,6 +56,8 @@ public class UserService {
 
     // 회원가입 예외
     private void REGISTER_VALIDATION(UserRegisterDto.Request request) {
+        String name = request.getName();
+
         if (request.getEmail() == null || request.getPw() == null || request.getName() == null)
             throw new CustomException(REGISTER_INFO_NULL); // 필수 항목
 
@@ -77,6 +79,13 @@ public class UserService {
 
         if (!(request.getName().length() > 1 && request.getName().length() < 9))
             throw new CustomException(LIMIT_NAME_LENGTH); // 1 < 이름 길이 < 9
+
+        if (name.contains("!") || name.contains("@") || name.contains("#") || name.contains("$")
+                || name.contains("%") || name.contains("^") || name.contains("&")  || name.contains(")")
+                || name.contains("*") || name.contains("(") || name.contains("0") || name.contains("1")
+                || name.contains("2") || name.contains("3") || name.contains("4") || name.contains("5")
+                || name.contains("6") || name.contains("7") || name.contains("8") || name.contains("9") )
+            throw new CustomException(NO_CONTAINS_IN_NAME); // 특수 기호 포함 X
 
         if (userRepository.existsByName(request.getName()))
             throw new CustomException(DUPLICATE_USER_NAME); // 이름 중복

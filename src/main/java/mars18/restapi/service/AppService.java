@@ -116,6 +116,8 @@ public class AppService {
     private void MYPAGETAP_VALIDATION(AppMyDto.Request request) {}
 
     private void INFO_UPDATE_VALIDATION(AppMyUpdateDto.Request request) {
+        String name = request.getUpdateName();
+
         if (request.getUpdateName() == null)
             throw new CustomException(NULL_USER_UPDATE_NAME); // 이름 비었을 때
 
@@ -127,6 +129,13 @@ public class AppService {
 
         if (userRepository.existsByName(request.getUpdateName()))
             throw new CustomException(DUPLICATE_USER_NAME); // 이름 중복
+
+        if (name.contains("!") || name.contains("@") || name.contains("#") || name.contains("$")
+                || name.contains("%") || name.contains("^") || name.contains("&")  || name.contains(")")
+                || name.contains("*") || name.contains("(") || name.contains("0") || name.contains("1")
+                || name.contains("2") || name.contains("3") || name.contains("4") || name.contains("5")
+                || name.contains("6") || name.contains("7") || name.contains("8") || name.contains("9") )
+            throw new CustomException(NO_CONTAINS_IN_NAME); // 특수 기호 포함 X
 
         if (!(request.getUpdatePw().length() > 5))
             throw new CustomException(PASSWORD_SIZE_ERROR); // 비밀번호 6자리 이상
