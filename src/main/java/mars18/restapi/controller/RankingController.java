@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class RankingComtroller {
+public class RankingController {
 
     private final RankingService rankingService;
 
