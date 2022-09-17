@@ -11,6 +11,7 @@ public interface UnityRepository extends JpaRepository<PlayRecord, Long> {
     PlayRecord findScoreByNameOrderByIdDesc(String name);
     PlayRecord findKindByNameOrderByIdDesc(String name);
 
-    //랭킹 서비스
-    PlayRecord findAllByOrderByScoreAsc();
+    //자격증 서비스
+     Boolean existsByNameAndKindAndScoreGreaterThanEqual(String name, String kind, int n);
+
 }
