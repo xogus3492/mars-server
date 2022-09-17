@@ -71,13 +71,15 @@ public class UserService {
         if (!(request.getPw().contains("!") || request.getPw().contains("@") || request.getPw().contains("#")
                 || request.getPw().contains("$") || request.getPw().contains("%") || request.getPw().contains("^")
                 || request.getPw().contains("&") || request.getPw().contains("*") || request.getPw().contains("(")
-                || request.getPw().contains(")"))
-        ) {
+                || request.getPw().contains(")")))
             throw new CustomException(NOT_CONTAINS_EXCLAMATIONMARK); // 특수 기호 포함
-        }
+
+
+        if (!(request.getName().length() > 1 && request.getName().length() < 9))
+            throw new CustomException(LIMIT_NAME_LENGTH); // 1 < 이름 길이 < 9
 
         if (userRepository.existsByName(request.getName()))
-            throw new CustomException(DUPLICATE_USER_NAME);
+            throw new CustomException(DUPLICATE_USER_NAME); // 이름 중복
         }
 
         //로그인 예외

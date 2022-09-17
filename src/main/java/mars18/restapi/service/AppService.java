@@ -2,24 +2,23 @@ package mars18.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mars18.restapi.dto.AppFeedbackDto;
-import mars18.restapi.dto.AppMyDto;
-import mars18.restapi.dto.UnityDto;
-import mars18.restapi.dto.UserLoginDto;
+import mars18.restapi.dto.*;
+import mars18.restapi.entity.License;
 import mars18.restapi.entity.PlayRecord;
+import mars18.restapi.entity.User;
 import mars18.restapi.exception.CustomException;
 import mars18.restapi.repository.UnityRepository;
+import mars18.restapi.repository.UserRepository;
 import mars18.restapi.repository.WebLicenseRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.constant.Constable;
+import java.util.*;
 
 import static mars18.restapi.exception.CustomErrorCode.*;
+import static mars18.restapi.model.StatusTrue.COMPLETE_UPDATE_INFO;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +26,8 @@ import static mars18.restapi.exception.CustomErrorCode.*;
 public class AppService {
 
     private final UnityRepository unityRepository;
-
     private final WebLicenseRepository webLicenseRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public AppFeedbackDto.Response feedbackTapData(AppFeedbackDto.Request request) {
@@ -78,6 +77,32 @@ public class AppService {
         return parentList;
     }
 
+    @Transactional
+    public Map<Object, Object> updateGetInfo(AppMyUpdateDto.Request request) {
+        //GET_INFO_VALIDATION(request);
+
+        Map<Object, Object> info = new HashMap<>();
+        info.put("name", userRepository.findByName(request.getName()).getName());
+        info.put("pw", userRepository.findByName(request.getName()).getPw());
+
+        return info;
+    }
+
+    @Transactional
+    public Constable updateInfo(AppMyUpdateDto.Request request) {
+        INFO_UPDATE_VALIDATION(request);
+
+            Optional<User> oUser = Optional.ofNullable(userRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
+            if(oUser.isPresent()) { // oLicense 객체가 존재하는지
+                User user = oUser.get();
+                user.setName(request.getUpdateName());
+                user.setPw(request.getUpdatePw());
+                userRepository.save(user);
+            }// db 필드에 받은 이름을 가진 레코드 수정
+
+        return COMPLETE_UPDATE_INFO;
+    }
+
     // 예외 처리
 
     private void FEEDBACKTAP_VALIDATION(AppFeedbackDto.Request request) {
@@ -88,11 +113,29 @@ public class AppService {
             throw new CustomException(NOT_EXISTS_USER_RECORD); // 유저 이름이 없을 때
     }
 
-    private void MYPAGETAP_VALIDATION(AppMyDto.Request request) {
-        if (request.getName() == null)
-            throw new CustomException(NULL_USER_NAME); // 이름 비었을 때 (처리 안되는 이유?)
+    private void MYPAGETAP_VALIDATION(AppMyDto.Request request) {}
 
-        if (!(unityRepository.existsNameByNameOrderByIdDesc(request.getName())))
-            throw new CustomException(NOT_EXISTS_USER_RECORD); // 유저 이름이 없을 때
+    private void INFO_UPDATE_VALIDATION(AppMyUpdateDto.Request request) {
+        if (request.getUpdateName() == null)
+            throw new CustomException(NULL_USER_UPDATE_NAME); // 이름 비었을 때
+
+        if (request.getUpdatePw() == null)
+            throw new CustomException(NULL_USER_UPDATE_PW); // 패스워드 비었을 때
+
+        if (!(request.getUpdateName().length() > 1 && request.getUpdateName().length() < 9))
+            throw new CustomException(LIMIT_NAME_LENGTH); // 1 < 이름 길이 < 9
+
+        if (userRepository.existsByName(request.getUpdateName()))
+            throw new CustomException(DUPLICATE_USER_NAME); // 이름 중복
+
+        if (!(request.getUpdatePw().length() > 5))
+            throw new CustomException(PASSWORD_SIZE_ERROR); // 비밀번호 6자리 이상
+
+        if (!(request.getUpdatePw().contains("!") || request.getUpdatePw().contains("@") || request.getUpdatePw().contains("#")
+                || request.getUpdatePw().contains("$") || request.getUpdatePw().contains("%") || request.getUpdatePw().contains("^")
+                || request.getUpdatePw().contains("&") || request.getUpdatePw().contains("*") || request.getUpdatePw().contains("(")
+                || request.getUpdatePw().contains(")")))
+            throw new CustomException(NOT_CONTAINS_EXCLAMATIONMARK); // 특수 기호 포함
+
     }
 }

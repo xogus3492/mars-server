@@ -13,20 +13,26 @@ public enum CustomErrorCode {
     NOT_CONTAINS_EXCLAMATIONMARK("비밀번호에 특수문자가 포함되어있지 않습니다."),
     DUPLICATE_USER_EMAIL("존재하는 이메일입니다."),
     DUPLICATE_USER_NAME("존재하는 이름입니다."),
+    LIMIT_NAME_LENGTH("이름은 2자리 이상 8자리 이하여야 합니다."),
+
 
     // 로그인
-    LOGIN_EMAIL_NULL("아이디를 입력해 주세요"),
-    LOGIN_PW_NULL("패스워드를 입력해 주세요"),
+    LOGIN_EMAIL_NULL("아이디를 입력하지 않았습니다."),
+    LOGIN_PW_NULL("패스워드를 입력하지 않았습니다."),
     NOT_EMAIL_OR_PW("아이디 또는 패스워드가 일치하지 않습니다."),
 
     // 플레이 기록 & 일반적인 상황
     NULL_USER_NAME("유저 이름을 입력하세요."),
 
     // 앱 - 피드백 탭
-    NOT_EXISTS_USER_RECORD("유저의 플레이 기록이 존재하지 않습니다"),
+    NOT_EXISTS_USER_RECORD("유저의 플레이 기록이 존재하지 않습니다."),
 
     // 랭킹
-    NOT_EXISTS_PLAY_RECORD("플레이 기록이 없습니다.");
+    NOT_EXISTS_PLAY_RECORD("플레이 기록이 없습니다."),
+
+    // 마이페이지 정보 수정
+    NULL_USER_UPDATE_NAME("수정 할 이름을 입력하지 않았습니다."),
+    NULL_USER_UPDATE_PW("수정 할 패스워드를 입력하지 않았습니다.");
 
     private final String statusMessage;
 }
