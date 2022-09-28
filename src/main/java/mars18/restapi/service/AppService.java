@@ -35,9 +35,9 @@ public class AppService {
 
         return AppFeedbackDto.Response.response(
                 PlayRecord.builder()
-                        .name(unityRepository.findNameByNameOrderByIdDesc(request.getName()).getName())
-                        .kind(unityRepository.findKindByNameOrderByIdDesc(request.getName()).getKind())
-                        .score(unityRepository.findScoreByNameOrderByIdDesc(request.getName()).getScore())
+                        .name(unityRepository.findTopByNameOrderByIdDesc(request.getName()).getName())
+                        .kind(unityRepository.findTopByNameOrderByIdDesc(request.getName()).getKind())
+                        .score(unityRepository.findTopByNameOrderByIdDesc(request.getName()).getScore())
                         .build()
         );
     }

@@ -10,9 +10,7 @@ import java.util.List;
 @Repository
 public interface UnityRepository extends JpaRepository<PlayRecord, Long> {
     Boolean existsNameByNameOrderByIdDesc(String name);
-    PlayRecord findNameByNameOrderByIdDesc(String name);
-    PlayRecord findScoreByNameOrderByIdDesc(String name);
-    PlayRecord findKindByNameOrderByIdDesc(String name);
+    PlayRecord findTopByNameOrderByIdDesc(String name);
 
      //자격증 서비스
      Boolean existsByNameAndKindAndScoreGreaterThanEqual(String name, String kind, int n);
