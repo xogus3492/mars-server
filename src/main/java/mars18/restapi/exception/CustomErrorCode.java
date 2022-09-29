@@ -14,7 +14,7 @@ public enum CustomErrorCode {
     DUPLICATE_USER_EMAIL("존재하는 이메일입니다."),
     DUPLICATE_USER_NAME("존재하는 이름입니다."),
     LIMIT_NAME_LENGTH("이름은 2자리 이상 8자리 이하여야 합니다."),
-    NO_CONTAINS_IN_NAME("이름에 기호, 숫자를 입력할 수 없습니다."),
+    NO_CONTAINS_IN_NAME("이름에 기호를 입력할 수 없습니다."),
 
 
     // 로그인
