@@ -93,12 +93,20 @@ public class AppService {
         INFO_UPDATE_VALIDATION(request);
 
             Optional<User> oUser = Optional.ofNullable(userRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
-            if(oUser.isPresent()) { // oLicense 객체가 존재하는지
+            if(oUser.isPresent()) { // oUser 객체가 존재하는지
                 User user = oUser.get();
                 user.setName(request.getUpdateName());
                 user.setPw(request.getUpdatePw());
                 userRepository.save(user);
-            }// db 필드에 받은 이름을 가진 레코드 수정
+            }// db user table 필드에 받은 이름을 가진 레코드 수정
+
+        List<PlayRecord> lPlayRecord = unityRepository.findByName(request.getName()); // name에 해당하는 레코드 객체
+            for (int i = 0; i < lPlayRecord.size(); i++) {
+                PlayRecord playRecord = lPlayRecord.get(i);
+                playRecord.setName(request.getUpdateName());
+                unityRepository.save(playRecord);
+            }
+        // db play_record table 필드에 받은 이름을 가진 레코드 수정
 
         return COMPLETE_UPDATE_INFO;
     }
@@ -132,9 +140,7 @@ public class AppService {
 
         if (name.contains("!") || name.contains("@") || name.contains("#") || name.contains("$")
                 || name.contains("%") || name.contains("^") || name.contains("&")  || name.contains(")")
-                || name.contains("*") || name.contains("(") || name.contains("0") || name.contains("1")
-                || name.contains("2") || name.contains("3") || name.contains("4") || name.contains("5")
-                || name.contains("6") || name.contains("7") || name.contains("8") || name.contains("9") )
+                || name.contains("*") || name.contains("(") || name.contains("0") )
             throw new CustomException(NO_CONTAINS_IN_NAME); // 특수 기호 포함 X
 
         if (!(request.getUpdatePw().length() > 5))
