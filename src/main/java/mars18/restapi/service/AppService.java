@@ -92,13 +92,20 @@ public class AppService {
     public Constable updateInfo(AppMyUpdateDto.Request request) {
         INFO_UPDATE_VALIDATION(request);
 
-            Optional<User> oUser = Optional.ofNullable(userRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
-            if(oUser.isPresent()) { // oUser 객체가 존재하는지
-                User user = oUser.get();
-                user.setName(request.getUpdateName());
-                user.setPw(request.getUpdatePw());
-                userRepository.save(user);
-            }// db user table 필드에 받은 이름을 가진 레코드 수정
+        Optional<User> oUser = Optional.ofNullable(userRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
+        if(oUser.isPresent()) { // oUser 객체가 존재하는지
+            User user = oUser.get();
+            user.setName(request.getUpdateName());
+            user.setPw(request.getUpdatePw());
+            userRepository.save(user);
+        }// db user table 필드에 받은 이름을 가진 레코드 수정
+
+        Optional<License> oLicense = Optional.ofNullable(webLicenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
+        if(oLicense.isPresent()) { // oUser 객체가 존재하는지
+            License license = oLicense.get();
+            license.setName(request.getUpdateName());
+            webLicenseRepository.save(license);
+        }// db license table 필드에 받은 이름을 가진 레코드 수정
 
         List<PlayRecord> lPlayRecord = unityRepository.findByName(request.getName()); // name에 해당하는 레코드 객체
             for (int i = 0; i < lPlayRecord.size(); i++) {
