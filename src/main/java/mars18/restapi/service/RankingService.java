@@ -35,6 +35,7 @@ public class RankingService {
             map.put("name", unityRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getName());
             map.put("kind", unityRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getKind());
             map.put("score", unityRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getScore());
+            map.put("playing_time", unityRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getPlaying_time());
             map.put("play_at", unityRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getCreateAt());
 
             list.add(map);
