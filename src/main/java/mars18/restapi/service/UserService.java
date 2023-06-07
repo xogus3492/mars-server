@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mars18.restapi.dto.UserLoginDto;
 import mars18.restapi.dto.UserRegisterDto;
-import mars18.restapi.entity.User;
-import mars18.restapi.exception.CustomException;
-import mars18.restapi.repository.UserRepository;
+import mars18.restapi.domain.user.domain.User;
+import mars18.restapi.global.exception.CustomException;
+import mars18.restapi.domain.user.domain.repository.UserRepository;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,8 @@ import java.lang.constant.Constable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static mars18.restapi.exception.CustomErrorCode.*;
-import static mars18.restapi.model.StatusTrue.REGISTER_STATUS_TRUE;
+import static mars18.restapi.global.exception.CustomErrorCode.*;
+import static mars18.restapi.global.model.StatusTrue.REGISTER_STATUS_TRUE;
 
 @Service
 @RequiredArgsConstructor

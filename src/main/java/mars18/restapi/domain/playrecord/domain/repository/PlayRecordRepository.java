@@ -1,15 +1,13 @@
-package mars18.restapi.repository;
+package mars18.restapi.domain.playrecord.domain.repository;
 
-import mars18.restapi.dto.UnityDto;
-import mars18.restapi.entity.PlayRecord;
-import mars18.restapi.entity.User;
+import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface UnityRepository extends JpaRepository<PlayRecord, Long> {
+public interface PlayRecordRepository extends JpaRepository<PlayRecord, Long> {
     Boolean existsNameByNameOrderByIdDesc(String name);
     PlayRecord findTopByNameOrderByIdDesc(String name);
 

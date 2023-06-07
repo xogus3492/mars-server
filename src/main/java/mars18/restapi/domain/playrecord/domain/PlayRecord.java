@@ -1,4 +1,4 @@
-package mars18.restapi.entity;
+package mars18.restapi.domain.playrecord.domain;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

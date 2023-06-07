@@ -1,4 +1,4 @@
-package mars18.restapi.configuration;
+package mars18.restapi.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

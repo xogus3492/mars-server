@@ -1,4 +1,4 @@
-package mars18.restapi.model;
+package mars18.restapi.global.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

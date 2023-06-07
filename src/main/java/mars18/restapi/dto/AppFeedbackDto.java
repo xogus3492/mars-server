@@ -3,7 +3,7 @@ package mars18.restapi.dto;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import mars18.restapi.entity.PlayRecord;
+import mars18.restapi.domain.playrecord.domain.PlayRecord;
 
 import javax.validation.constraints.NotNull;
 

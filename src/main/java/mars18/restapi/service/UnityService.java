@@ -3,35 +3,33 @@ package mars18.restapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mars18.restapi.dto.UnityDto;
-import mars18.restapi.dto.WebLicenseDto;
-import mars18.restapi.entity.License;
-import mars18.restapi.entity.PlayRecord;
-import mars18.restapi.exception.CustomException;
-import mars18.restapi.repository.UnityRepository;
-import mars18.restapi.repository.WebLicenseRepository;
+import mars18.restapi.domain.license.domain.License;
+import mars18.restapi.domain.playrecord.domain.PlayRecord;
+import mars18.restapi.global.exception.CustomException;
+import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
+import mars18.restapi.domain.license.domain.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.lang.constant.Constable;
 import java.util.Optional;
 
-import static mars18.restapi.exception.CustomErrorCode.NULL_USER_NAME;
-import static mars18.restapi.exception.CustomErrorCode.REGISTER_INFO_NULL;
-import static mars18.restapi.model.StatusTrue.RECORD_STATUS_TRUE;
+import static mars18.restapi.global.exception.CustomErrorCode.NULL_USER_NAME;
+import static mars18.restapi.global.model.StatusTrue.RECORD_STATUS_TRUE;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UnityService {
 
-    private final UnityRepository unityRepository;
-    private final WebLicenseRepository webLicenseRepository;
+    private final PlayRecordRepository playRecordRepository;
+    private final LicenseRepository licenseRepository;
 
     @Transactional
     public Constable playRecord(UnityDto.Request request) {
         PLAYRECORD_VALIDATION(request);
 
-        unityRepository.save(
+        playRecordRepository.save(
                 PlayRecord.builder()
                         .name(request.getName())
                         .score(request.getScore())
@@ -40,8 +38,8 @@ public class UnityService {
                         .build()
         );
 
-        if(!(webLicenseRepository.existsByName(request.getName()))) {
-            webLicenseRepository.save(
+        if(!(licenseRepository.existsByName(request.getName()))) {
+            licenseRepository.save(
                     License.builder()
                             .name(request.getName())
                             .bartender(Boolean.FALSE)
@@ -50,14 +48,14 @@ public class UnityService {
             );
         } // db 필드에 받은 이름을 가진 레코드가 없으면 생성
 
-        if(webLicenseRepository.existsByName(request.getName())) {
-            Optional<License> oLicense = Optional.ofNullable(webLicenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
+        if(licenseRepository.existsByName(request.getName())) {
+            Optional<License> oLicense = Optional.ofNullable(licenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
             if(oLicense.isPresent()) { // oLicense 객체가 존재하는지
                 License license = oLicense.get();
                 license.setName(request.getName());
                 license.setBartender(getBartender(request));
                 license.setBaker(getBaker(request));
-                webLicenseRepository.save(license);
+                licenseRepository.save(license);
             }
         } // db 필드에 받은 이름을 가진 레코드 수정
 
@@ -66,12 +64,12 @@ public class UnityService {
 
     public Boolean getBartender(UnityDto.Request request) {
 
-        return unityRepository.existsByNameAndKindAndScoreGreaterThanEqual(request.getName(), "bartender", 60);
+        return playRecordRepository.existsByNameAndKindAndScoreGreaterThanEqual(request.getName(), "bartender", 60);
     }
 
     public Boolean getBaker(UnityDto.Request request) {
 
-        return unityRepository.existsByNameAndKindAndScoreGreaterThanEqual(request.getName(), "baker", 60);
+        return playRecordRepository.existsByNameAndKindAndScoreGreaterThanEqual(request.getName(), "baker", 60);
     }
 
     //예외처리

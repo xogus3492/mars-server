@@ -1,11 +1,11 @@
-package mars18.restapi.repository;
+package mars18.restapi.domain.license.domain.repository;
 
-import mars18.restapi.entity.License;
+import mars18.restapi.domain.license.domain.License;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WebLicenseRepository extends JpaRepository<License, Long> {
+public interface LicenseRepository extends JpaRepository<License, Long> {
 
     Boolean existsByName(String name);
 

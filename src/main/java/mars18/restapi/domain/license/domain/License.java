@@ -1,4 +1,4 @@
-package mars18.restapi.entity;
+package mars18.restapi.domain.license.domain;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;

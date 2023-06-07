@@ -3,30 +3,29 @@ package mars18.restapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mars18.restapi.dto.*;
-import mars18.restapi.entity.License;
-import mars18.restapi.entity.PlayRecord;
-import mars18.restapi.entity.User;
-import mars18.restapi.exception.CustomException;
-import mars18.restapi.repository.UnityRepository;
-import mars18.restapi.repository.UserRepository;
-import mars18.restapi.repository.WebLicenseRepository;
-import org.springframework.data.domain.Sort;
+import mars18.restapi.domain.license.domain.License;
+import mars18.restapi.domain.playrecord.domain.PlayRecord;
+import mars18.restapi.domain.user.domain.User;
+import mars18.restapi.global.exception.CustomException;
+import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
+import mars18.restapi.domain.user.domain.repository.UserRepository;
+import mars18.restapi.domain.license.domain.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.lang.constant.Constable;
 import java.util.*;
 
-import static mars18.restapi.exception.CustomErrorCode.*;
-import static mars18.restapi.model.StatusTrue.COMPLETE_UPDATE_INFO;
+import static mars18.restapi.global.exception.CustomErrorCode.*;
+import static mars18.restapi.global.model.StatusTrue.COMPLETE_UPDATE_INFO;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AppService {
 
-    private final UnityRepository unityRepository;
-    private final WebLicenseRepository webLicenseRepository;
+    private final PlayRecordRepository playRecordRepository;
+    private final LicenseRepository licenseRepository;
     private final UserRepository userRepository;
 
     @Transactional
@@ -35,9 +34,9 @@ public class AppService {
 
         return AppFeedbackDto.Response.response(
                 PlayRecord.builder()
-                        .name(unityRepository.findTopByNameOrderByIdDesc(request.getName()).getName())
-                        .kind(unityRepository.findTopByNameOrderByIdDesc(request.getName()).getKind())
-                        .score(unityRepository.findTopByNameOrderByIdDesc(request.getName()).getScore())
+                        .name(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getName())
+                        .kind(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getKind())
+                        .score(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getScore())
                         .build()
         );
     }
@@ -51,12 +50,12 @@ public class AppService {
         Map<Object, Object> noArrMap = new HashMap<>();
 
         noArrMap.put("name", request.getName());
-        noArrMap.put("bartender", webLicenseRepository.findByName(request.getName()).getBartender());
-        noArrMap.put("baker", webLicenseRepository.findByName(request.getName()).getBaker());
+        noArrMap.put("bartender", licenseRepository.findByName(request.getName()).getBartender());
+        noArrMap.put("baker", licenseRepository.findByName(request.getName()).getBaker());
 
         // kind, ranking, score, play_at, playing_time
 
-        List<PlayRecord> recordData = unityRepository.findByNameOrderByScoreDesc(request.getName());
+        List<PlayRecord> recordData = playRecordRepository.findByNameOrderByScoreDesc(request.getName());
         // 점수 내림차순 정렬한 name과 같은 이름의 레코드(들)
 
         System.out.println("recordData.size() = " + recordData.size());
@@ -100,18 +99,18 @@ public class AppService {
             userRepository.save(user);
         }// db user table 필드에 받은 이름을 가진 레코드 수정
 
-        Optional<License> oLicense = Optional.ofNullable(webLicenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
+        Optional<License> oLicense = Optional.ofNullable(licenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
         if(oLicense.isPresent()) { // oUser 객체가 존재하는지
             License license = oLicense.get();
             license.setName(request.getUpdateName());
-            webLicenseRepository.save(license);
+            licenseRepository.save(license);
         }// db license table 필드에 받은 이름을 가진 레코드 수정
 
-        List<PlayRecord> lPlayRecord = unityRepository.findByName(request.getName()); // name에 해당하는 레코드 객체
+        List<PlayRecord> lPlayRecord = playRecordRepository.findByName(request.getName()); // name에 해당하는 레코드 객체
             for (int i = 0; i < lPlayRecord.size(); i++) {
                 PlayRecord playRecord = lPlayRecord.get(i);
                 playRecord.setName(request.getUpdateName());
-                unityRepository.save(playRecord);
+                playRecordRepository.save(playRecord);
             }
         // db play_record table 필드에 받은 이름을 가진 레코드 수정
 
@@ -124,7 +123,7 @@ public class AppService {
         if (request.getName() == null)
         throw new CustomException(NULL_USER_NAME); // 이름 비었을 때 (처리 안되는 이유?)
 
-        if (!(unityRepository.existsNameByNameOrderByIdDesc(request.getName())))
+        if (!(playRecordRepository.existsNameByNameOrderByIdDesc(request.getName())))
             throw new CustomException(NOT_EXISTS_USER_RECORD); // 유저 이름이 없을 때
     }
 
