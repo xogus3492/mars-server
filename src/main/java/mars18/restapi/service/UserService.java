@@ -7,7 +7,6 @@ import mars18.restapi.dto.UserRegisterDto;
 import mars18.restapi.domain.user.domain.User;
 import mars18.restapi.global.exception.CustomException;
 import mars18.restapi.domain.user.domain.repository.UserRepository;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static mars18.restapi.global.exception.CustomErrorCode.*;
-import static mars18.restapi.global.model.StatusTrue.REGISTER_STATUS_TRUE;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +21,6 @@ import static mars18.restapi.global.model.StatusTrue.REGISTER_STATUS_TRUE;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    //private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public Void registerUser(UserRegisterDto.Request request) {
