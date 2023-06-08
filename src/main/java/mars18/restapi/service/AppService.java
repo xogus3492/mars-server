@@ -81,7 +81,7 @@ public class AppService {
 
         Map<Object, Object> info = new HashMap<>();
         info.put("name", userRepository.findByName(request.getName()).getName());
-        info.put("pw", userRepository.findByName(request.getName()).getPw());
+        info.put("pw", userRepository.findByName(request.getName()).getPassword());
 
         return info;
     }
@@ -143,7 +143,7 @@ public class AppService {
         if (name.contains("!") || name.contains("@") || name.contains("#") || name.contains("$")
                 || name.contains("%") || name.contains("^") || name.contains("&")  || name.contains(")")
                 || name.contains("*") || name.contains("(") || name.contains("0") )
-            throw new CustomException(NO_CONTAINS_IN_NAME); // 특수 기호 포함 X
+            throw new CustomException(NOT_CONTAINS_IN_NAME); // 특수 기호 포함 X
 
         if (!(request.getUpdatePw().length() > 5))
             throw new CustomException(PASSWORD_SIZE_ERROR); // 비밀번호 6자리 이상
