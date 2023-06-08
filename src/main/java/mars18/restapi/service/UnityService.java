@@ -11,11 +11,8 @@ import mars18.restapi.domain.license.domain.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.constant.Constable;
-import java.util.Optional;
 
 import static mars18.restapi.global.exception.CustomErrorCode.NULL_USER_NAME;
-import static mars18.restapi.global.model.StatusTrue.RECORD_STATUS_TRUE;
 
 @Service
 @RequiredArgsConstructor
@@ -26,19 +23,19 @@ public class UnityService {
     private final LicenseRepository licenseRepository;
 
     @Transactional
-    public Constable playRecord(UnityDto.Request request) {
+    public Void playRecord(UnityDto.Request request) {
         PLAYRECORD_VALIDATION(request);
 
         playRecordRepository.save(
                 PlayRecord.builder()
                         .name(request.getName())
                         .score(request.getScore())
-                        .playing_time(request.getPlaying_time())
+                        //.playingTime(request.getPlayingTime())
                         .kind(request.getKind())
                         .build()
         );
 
-        if(!(licenseRepository.existsByName(request.getName()))) {
+        if (!(licenseRepository.existsByName(request.getName()))) {
             licenseRepository.save(
                     License.builder()
                             .name(request.getName())
@@ -59,7 +56,7 @@ public class UnityService {
 //            }
 //        } // db 필드에 받은 이름을 가진 레코드 수정
 
-        return RECORD_STATUS_TRUE;
+        return null;
     }
 
     public Boolean getBartender(UnityDto.Request request) {

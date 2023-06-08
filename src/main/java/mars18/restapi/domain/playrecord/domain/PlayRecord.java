@@ -17,15 +17,15 @@ public class PlayRecord extends BaseTimeEntity {
     private Long id;
     private String name;
     private int score;
-    private String playing_time;
+    private String playingTime;
     private String kind;
 
     @Builder
-    public PlayRecord(Long id, String name, int score, String playing_time, String kind) {
+    public PlayRecord(Long id, String name, int score, String playingTime, String kind) {
         this.id = id;
         this.name = name;
         this.score = score;
-        this.playing_time = playing_time;
+        this.playingTime = playingTime;
         this.kind = kind;
     }
 }

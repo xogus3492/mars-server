@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.lang.constant.Constable;
 import java.util.Map;
 
 @RestController
@@ -18,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("register")
-    public Constable registerUser(@Valid @RequestBody final UserRegisterDto.Request request) {
+    public Void registerUser(@Valid @RequestBody final UserRegisterDto.Request request) {
         return userService.registerUser(request);
     }
 

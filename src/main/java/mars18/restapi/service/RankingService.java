@@ -34,8 +34,8 @@ public class RankingService {
             map.put("name", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getName());
             map.put("kind", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getKind());
             map.put("score", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getScore());
-            map.put("playing_time", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getPlaying_time());
-            map.put("play_at", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getCreateAt());
+            //map.put("playing_time", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getPlaying_time());
+            //map.put("play_at", playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score")).get(i).getCreateAt());
 
             list.add(map);
         }

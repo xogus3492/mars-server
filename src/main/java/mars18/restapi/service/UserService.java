@@ -11,7 +11,6 @@ import mars18.restapi.domain.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.constant.Constable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class UserService {
     //private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Constable registerUser(UserRegisterDto.Request request) {
+    public Void registerUser(UserRegisterDto.Request request) {
         REGISTER_VALIDATION(request);
 
         userRepository.save(
@@ -39,7 +38,7 @@ public class UserService {
                         .build()
         );
 
-         return REGISTER_STATUS_TRUE;
+         return null;
     }
 
     @Transactional

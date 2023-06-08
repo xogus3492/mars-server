@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.lang.constant.Constable;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class UnityController {
     private final UnityService unityService;
 
     @PostMapping("play")
-    public Constable playRecord(@Valid @RequestBody final UnityDto.Request request) {
+    public Void playRecord(@Valid @RequestBody final UnityDto.Request request) {
         return unityService.playRecord(request);
     }
 }

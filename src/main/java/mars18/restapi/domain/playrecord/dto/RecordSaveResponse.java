@@ -21,7 +21,7 @@ public class RecordSaveResponse {
                 .id(playRecord.getId())
                 .name(playRecord.getName())
                 .score(playRecord.getScore())
-                .playing_time(playRecord.getPlaying_time())
+                .playing_time(playRecord.getPlayingTime())
                 .kind(playRecord.getKind())
                 .build();
     }

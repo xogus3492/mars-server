@@ -26,8 +26,8 @@ public class WebService {
         //WEBLICENSE_VALIDATION(request);
 
         Map<Object, Object> license = new HashMap<>();
-        license.put("bartender", licenseRepository.findByName(request.getName()).getBartender());
-        license.put("baker", licenseRepository.findByName(request.getName()).getBaker());
+        //license.put("bartender", licenseRepository.findByName(request.getName()).getBartender());
+        //license.put("baker", licenseRepository.findByName(request.getName()).getBaker());
 
         return license;
     }

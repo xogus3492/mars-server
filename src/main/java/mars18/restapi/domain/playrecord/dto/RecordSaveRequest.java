@@ -14,7 +14,7 @@ public class RecordSaveRequest {
     @NotNull
     private int score;
     @NotBlank
-    private String playing_time;
+    private String playingTime;
     @NotBlank
     private String kind;
 
@@ -22,7 +22,7 @@ public class RecordSaveRequest {
         return PlayRecord.builder()
                 .name(name)
                 .score(score)
-                .playing_time(playing_time)
+                .playingTime(playingTime)
                 .kind(kind)
                 .build();
     }
