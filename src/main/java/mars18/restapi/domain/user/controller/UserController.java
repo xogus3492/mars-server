@@ -2,6 +2,7 @@ package mars18.restapi.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import mars18.restapi.domain.user.dto.CommonUserResponse;
+import mars18.restapi.domain.user.dto.LoginRequest;
 import mars18.restapi.domain.user.dto.SignUpRequest;
 import mars18.restapi.dto.UserLoginDto;
 import mars18.restapi.domain.user.service.UserService;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +30,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Map<Object, Object> loginUser(@Valid @RequestBody final UserLoginDto.Request request) {
-        return userService.loginUser(request);
+    public ResponseEntity<CommonUserResponse> login(
+            @RequestBody @Valid final LoginRequest request
+    ) {
+        CommonUserResponse response = userService.login(request);
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -18,9 +18,7 @@ public enum CustomErrorCode {
 
 
     // 로그인
-    LOGIN_EMAIL_NULL("아이디를 입력하지 않았습니다."),
-    LOGIN_PW_NULL("패스워드를 입력하지 않았습니다."),
-    NOT_EMAIL_OR_PW("아이디 또는 패스워드가 일치하지 않습니다."),
+    NOT_MATCH_PW("패스워드가 일치하지 않습니다."),
 
     // 플레이 기록 & 일반적인 상황
     NULL_USER_NAME("유저 이름을 입력하세요."),
@@ -36,7 +34,8 @@ public enum CustomErrorCode {
     NULL_USER_UPDATE_PW("수정 할 패스워드를 입력하지 않았습니다."),
 
     // entity not found
-    LICENSE_NOT_FOUND("자격증 정보를 찾을 수 없습니다.");
+    LICENSE_NOT_FOUND("자격증 정보를 찾을 수 없습니다."),
+    USER_NOT_FOUND("유저를 찾을 수 없습니다.");
 
     private final String statusMessage;
 }
