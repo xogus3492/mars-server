@@ -34,9 +34,9 @@ public class AppService {
 
         return AppFeedbackDto.Response.response(
                 PlayRecord.builder()
-                        .name(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getName())
-                        .kind(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getKind())
-                        .score(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getScore())
+                        //.name(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getName())
+                        //.kind(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getKind())
+                        //.score(playRecordRepository.findTopByNameOrderByIdDesc(request.getName()).getScore())
                         .build()
         );
     }
@@ -122,9 +122,6 @@ public class AppService {
     private void FEEDBACKTAP_VALIDATION(AppFeedbackDto.Request request) {
         if (request.getName() == null)
         throw new CustomException(NULL_USER_NAME); // 이름 비었을 때 (처리 안되는 이유?)
-
-        if (!(playRecordRepository.existsNameByNameOrderByIdDesc(request.getName())))
-            throw new CustomException(NOT_EXISTS_USER_RECORD); // 유저 이름이 없을 때
     }
 
     private void MYPAGETAP_VALIDATION(AppMyDto.Request request) {}

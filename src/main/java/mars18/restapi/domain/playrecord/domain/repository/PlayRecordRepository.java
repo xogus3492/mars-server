@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PlayRecordRepository extends JpaRepository<PlayRecord, Long> {
-    Boolean existsNameByNameOrderByIdDesc(String name);
-    PlayRecord findTopByNameOrderByIdDesc(String name);
+    Optional<PlayRecord> findTopByNameOrderByIdDesc(String name);
 
     //자격증 서비스
     Boolean existsByNameAndKindAndScoreGreaterThanEqual(String name, String kind, int n);
