@@ -8,13 +8,13 @@ import mars18.restapi.domain.playrecord.domain.PlayRecord;
 @Getter
 @Builder
 @AllArgsConstructor
-public class FeedbackResponse {
+public class FeedbackReadResponse {
     private String name;
     private String kind;
     private int score;
 
-    public static FeedbackResponse of(PlayRecord playRecord) {
-        return FeedbackResponse.builder()
+    public static FeedbackReadResponse of(PlayRecord playRecord) {
+        return FeedbackReadResponse.builder()
                 .name(playRecord.getName())
                 .kind(playRecord.getKind())
                 .score(playRecord.getScore())

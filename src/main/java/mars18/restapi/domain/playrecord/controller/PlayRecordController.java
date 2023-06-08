@@ -1,14 +1,17 @@
 package mars18.restapi.domain.playrecord.controller;
 
 import lombok.RequiredArgsConstructor;
-import mars18.restapi.domain.playrecord.dto.FeedbackRequest;
-import mars18.restapi.domain.playrecord.dto.FeedbackResponse;
+import mars18.restapi.domain.playrecord.dto.FeedbackReadRequest;
+import mars18.restapi.domain.playrecord.dto.FeedbackReadResponse;
+import mars18.restapi.domain.playrecord.dto.RecordSaveRequest;
+import mars18.restapi.domain.playrecord.dto.RecordSaveResponse;
 import mars18.restapi.domain.playrecord.service.PlayRecordService;
-import mars18.restapi.dto.AppFeedbackDto;
+import mars18.restapi.dto.UnityDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.constant.Constable;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,12 +20,21 @@ public class PlayRecordController {
 
     private final PlayRecordService playRecordService;
 
-    @PostMapping("/feedback")
-    public ResponseEntity<FeedbackResponse> getFeedback(
-            @RequestBody @Valid final FeedbackRequest request
-    ) {
-        FeedbackResponse response = playRecordService.getFeedBack(request);
+    @PostMapping("/play")
+    public ResponseEntity<RecordSaveResponse> saveRecord(
+            @RequestBody @Valid final RecordSaveRequest request)
+    {
+        RecordSaveResponse response = playRecordService.saveRecord(request);
 
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/feedback")
+    public ResponseEntity<FeedbackReadResponse> getFeedback(
+            @RequestBody @Valid final FeedbackReadRequest request
+    ) {
+        FeedbackReadResponse response = playRecordService.getFeedBack(request);
+
+        return ResponseEntity.ok(response);
     }
 }

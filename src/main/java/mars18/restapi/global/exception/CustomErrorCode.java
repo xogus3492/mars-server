@@ -33,7 +33,10 @@ public enum CustomErrorCode {
 
     // 마이페이지 정보 수정
     NULL_USER_UPDATE_NAME("수정 할 이름을 입력하지 않았습니다."),
-    NULL_USER_UPDATE_PW("수정 할 패스워드를 입력하지 않았습니다.");
+    NULL_USER_UPDATE_PW("수정 할 패스워드를 입력하지 않았습니다."),
+
+    // entity not found
+    LICENSE_NOT_FOUND("자격증 정보를 찾을 수 없습니다.");
 
     private final String statusMessage;
 }

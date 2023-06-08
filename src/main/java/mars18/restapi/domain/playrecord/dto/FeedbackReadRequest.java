@@ -5,7 +5,7 @@ import lombok.Getter;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-public class FeedbackRequest {
+public class FeedbackReadRequest {
 
     @NotBlank
     private String name;

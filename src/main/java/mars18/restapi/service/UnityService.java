@@ -48,16 +48,16 @@ public class UnityService {
             );
         } // db 필드에 받은 이름을 가진 레코드가 없으면 생성
 
-        if(licenseRepository.existsByName(request.getName())) {
-            Optional<License> oLicense = Optional.ofNullable(licenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
-            if(oLicense.isPresent()) { // oLicense 객체가 존재하는지
-                License license = oLicense.get();
-                license.setName(request.getName());
-                license.setBartender(getBartender(request));
-                license.setBaker(getBaker(request));
-                licenseRepository.save(license);
-            }
-        } // db 필드에 받은 이름을 가진 레코드 수정
+//        if(licenseRepository.existsByName(request.getName())) {
+//            Optional<License> oLicense = Optional.ofNullable(licenseRepository.findByName(request.getName())); // name에 해당하는 레코드 객체
+//            if(oLicense.isPresent()) { // oLicense 객체가 존재하는지
+//                License license = oLicense.get();
+//                license.setName(request.getName());
+//                license.setBartender(getBartender(request));
+//                license.setBaker(getBaker(request));
+//                licenseRepository.save(license);
+//            }
+//        } // db 필드에 받은 이름을 가진 레코드 수정
 
         return RECORD_STATUS_TRUE;
     }
