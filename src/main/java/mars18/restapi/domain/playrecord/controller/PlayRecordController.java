@@ -1,15 +1,14 @@
 package mars18.restapi.domain.playrecord.controller;
 
 import lombok.RequiredArgsConstructor;
-import mars18.restapi.domain.playrecord.dto.FeedbackReadRequest;
-import mars18.restapi.domain.playrecord.dto.FeedbackReadResponse;
-import mars18.restapi.domain.playrecord.dto.RecordSaveRequest;
-import mars18.restapi.domain.playrecord.dto.RecordSaveResponse;
+import mars18.restapi.domain.playrecord.dto.*;
 import mars18.restapi.domain.playrecord.service.PlayRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +24,13 @@ public class PlayRecordController {
         RecordSaveResponse response = playRecordService.saveRecord(request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/ranking")
+    public ResponseEntity<List<RankingResponse>> getRanking() {
+        List<RankingResponse> responses = playRecordService.getRanking();
+
+        return ResponseEntity.ok(responses);
     }
 
     @PostMapping("/feedback")

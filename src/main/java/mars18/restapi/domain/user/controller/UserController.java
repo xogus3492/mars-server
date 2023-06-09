@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import mars18.restapi.domain.user.dto.CommonUserResponse;
 import mars18.restapi.domain.user.dto.LoginRequest;
 import mars18.restapi.domain.user.dto.SignUpRequest;
-import mars18.restapi.dto.UserLoginDto;
 import mars18.restapi.domain.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

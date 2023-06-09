@@ -1,23 +1,16 @@
 package mars18.restapi.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import mars18.restapi.domain.user.dto.CommonUserResponse;
 import mars18.restapi.domain.user.dto.LoginRequest;
 import mars18.restapi.domain.user.dto.SignUpRequest;
-import mars18.restapi.dto.UserLoginDto;
-import mars18.restapi.dto.UserRegisterDto;
 import mars18.restapi.domain.user.domain.User;
-import mars18.restapi.global.exception.CustomErrorCode;
 import mars18.restapi.global.exception.CustomException;
 import mars18.restapi.domain.user.domain.repository.UserRepository;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Map;
 
 import static mars18.restapi.global.exception.CustomErrorCode.*;
 

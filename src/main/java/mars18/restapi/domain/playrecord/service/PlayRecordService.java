@@ -5,16 +5,18 @@ import mars18.restapi.domain.license.domain.License;
 import mars18.restapi.domain.license.domain.repository.LicenseRepository;
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
-import mars18.restapi.domain.playrecord.dto.FeedbackReadRequest;
-import mars18.restapi.domain.playrecord.dto.FeedbackReadResponse;
-import mars18.restapi.domain.playrecord.dto.RecordSaveRequest;
-import mars18.restapi.domain.playrecord.dto.RecordSaveResponse;
-import mars18.restapi.dto.UnityDto;
+import mars18.restapi.domain.playrecord.dto.*;
 import mars18.restapi.global.exception.CustomErrorCode;
 import mars18.restapi.global.exception.CustomException;
 import mars18.restapi.global.policy.LicensePolicy;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -47,10 +49,25 @@ public class PlayRecordService {
     }
 
     @Transactional(readOnly = true)
+    public List<RankingResponse> getRanking() {
+        List<PlayRecord> list = playRecordRepository.findAll(Sort.by(Sort.Direction.DESC, "score"));
+
+        long ranking = 1;
+        List<RankingResponse> responses = new ArrayList<>();
+        for (PlayRecord p : list) {
+            responses.add(RankingResponse.of(ranking++, p));
+        }
+
+        return responses;
+    }
+
+    @Transactional(readOnly = true)
     public FeedbackReadResponse getFeedBack(FeedbackReadRequest request) {
         PlayRecord playRecord = playRecordRepository.findTopByNameOrderByIdDesc(request.getName())
                 .orElseThrow(() -> new CustomException(CustomErrorCode.NOT_EXISTS_USER_RECORD));
 
         return FeedbackReadResponse.of(playRecord);
     }
+
+
 }

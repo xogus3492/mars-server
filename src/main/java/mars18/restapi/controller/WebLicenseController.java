@@ -1,7 +1,6 @@
 package mars18.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import mars18.restapi.dto.UserLoginDto;
 import mars18.restapi.dto.WebLicenseDto;
 import mars18.restapi.service.WebService;
 import org.springframework.web.bind.annotation.PostMapping;
