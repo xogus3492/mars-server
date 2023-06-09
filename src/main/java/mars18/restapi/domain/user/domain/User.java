@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,8 +16,14 @@ public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 50, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(length = 5, unique = true, nullable = false)
     private String name;
 
     @Builder
@@ -25,5 +32,9 @@ public class User extends BaseTimeEntity {
         this.email = email;
         this.password = password;
         this.name = name;
+    }
+
+    public void updateName(String afterName) {
+        this.name = afterName;
     }
 }

@@ -1,11 +1,9 @@
 package mars18.restapi.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
-import mars18.restapi.domain.user.dto.CommonUserResponse;
-import mars18.restapi.domain.user.dto.LoginRequest;
-import mars18.restapi.domain.user.dto.MyRecordResponse;
-import mars18.restapi.domain.user.dto.SignUpRequest;
+import mars18.restapi.domain.user.dto.*;
 import mars18.restapi.domain.user.service.UserService;
+import mars18.restapi.dto.AppMyUpdateDto;
 import mars18.restapi.global.common.dto.CommonRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,10 +41,19 @@ public class UserController {
 
     @PostMapping("/my/record")
     public ResponseEntity<List<MyRecordResponse>> getMyRecord(
-            @Valid @RequestBody final CommonRequest request
+            @RequestBody @Valid final CommonRequest request
     ) {
         List<MyRecordResponse> responses = userService.getMyRecord(request);
 
         return ResponseEntity.ok(responses);
+    }
+
+    @PostMapping("/my/update")
+    public ResponseEntity<UpdateMyNameResponse> updateName(
+            @RequestBody @Valid final UpdateMyNameRequest request
+    ) {
+        UpdateMyNameResponse response = userService.updateName(request);
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -44,4 +44,8 @@ public class License extends BaseTimeEntity {
     public void acquireBaker() {
         this.baker = true;
     }
+
+    public void updateName(String afterName) {
+        this.name = afterName;
+    }
 }

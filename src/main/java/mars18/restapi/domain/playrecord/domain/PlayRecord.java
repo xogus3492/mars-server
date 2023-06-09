@@ -29,4 +29,8 @@ public class PlayRecord extends BaseTimeEntity {
         this.playingTime = playingTime;
         this.kind = kind;
     }
+
+    public void updateName(String afterName) {
+        this.name = afterName;
+    }
 }

@@ -12,14 +12,15 @@ public class SignUpRequest {
 
     @Email
     @NotBlank
+    @Size(max = 50)
     private String email;
 
     @NotBlank
-    @Size(min = 6)
+    @Size(min = 6, max = 20)
     private String password;
 
     @NotBlank
-    @Size(min = 1, max = 5)
+    @Size(max = 5)
     private String name;
 
     public User toEntity(String pw) {
