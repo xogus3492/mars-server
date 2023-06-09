@@ -80,8 +80,8 @@ public class AppService {
         //GET_INFO_VALIDATION(request);
 
         Map<Object, Object> info = new HashMap<>();
-        info.put("name", userRepository.findByName(request.getName()).getName());
-        info.put("pw", userRepository.findByName(request.getName()).getPassword());
+        //info.put("name", userRepository.findByName(request.getName()).getName());
+        //info.put("pw", userRepository.findByName(request.getName()).getPassword());
 
         return info;
     }

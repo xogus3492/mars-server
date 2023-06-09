@@ -38,10 +38,10 @@ public class PlayRecordService {
 
         if (playRecord.getScore() >= LicensePolicy.STANDARD_ACQUISITION_SCORE) {
             if (playRecord.getKind().equals("bartender")) {
-                license.updateBartender();
+                license.acquireBartender();
             }
             if (playRecord.getKind().equals("baker")) {
-                license.updateBaker();
+                license.acquireBaker();
             }
         }
 

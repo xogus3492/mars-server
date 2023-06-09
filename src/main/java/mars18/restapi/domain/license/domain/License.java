@@ -37,11 +37,11 @@ public class License extends BaseTimeEntity {
                 .build();
     }
 
-    public void updateBartender() {
+    public void acquireBartender() {
         this.bartender = true;
     }
 
-    public void updateBaker() {
+    public void acquireBaker() {
         this.baker = true;
     }
 }
