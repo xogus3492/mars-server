@@ -1,28 +1,28 @@
-package mars18.restapi.domain.playrecord.dto;
+package mars18.restapi.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import mars18.restapi.domain.playrecord.domain.PlayRole;
+import mars18.restapi.domain.playrecord.dto.RankingResponse;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class RankingResponse {
-
-    private Long ranking;
+public class MyRecordResponse {
+    private Long id;
     private String name;
     private PlayRole kind;
     private Integer score;
     private String playingTime;
     private LocalDateTime playAt;
 
-    public static RankingResponse of(Long ranking, PlayRecord playRecord) {
-        return RankingResponse.builder()
-                .ranking(ranking)
+    public static MyRecordResponse of(PlayRecord playRecord) {
+        return MyRecordResponse.builder()
+                .id(playRecord.getId())
                 .name(playRecord.getName())
                 .kind(playRecord.getKind())
                 .score(playRecord.getScore())

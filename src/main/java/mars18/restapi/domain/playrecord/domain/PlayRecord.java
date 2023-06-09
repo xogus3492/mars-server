@@ -18,10 +18,11 @@ public class PlayRecord extends BaseTimeEntity {
     private String name;
     private int score;
     private String playingTime;
-    private String kind;
+    @Enumerated(EnumType.STRING)
+    private PlayRole kind;
 
     @Builder
-    public PlayRecord(Long id, String name, int score, String playingTime, String kind) {
+    public PlayRecord(Long id, String name, int score, String playingTime, PlayRole kind) {
         this.id = id;
         this.name = name;
         this.score = score;

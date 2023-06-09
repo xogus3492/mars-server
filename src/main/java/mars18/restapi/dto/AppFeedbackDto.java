@@ -32,7 +32,7 @@ public class AppFeedbackDto {
         public static AppFeedbackDto.Response response(@NotNull PlayRecord playRecord){
             return Response.builder()
                     .name(playRecord.getName())
-                    .kind(playRecord.getKind())
+                    //.kind(playRecord.getKind())
                     .score(playRecord.getScore())
                     .build();
         }

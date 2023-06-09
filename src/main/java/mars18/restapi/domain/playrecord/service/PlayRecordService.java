@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mars18.restapi.domain.license.domain.License;
 import mars18.restapi.domain.license.domain.repository.LicenseRepository;
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
+import mars18.restapi.domain.playrecord.domain.PlayRole;
 import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
 import mars18.restapi.domain.playrecord.dto.*;
 import mars18.restapi.global.exception.CustomErrorCode;
@@ -37,10 +38,10 @@ public class PlayRecordService {
                 .orElseThrow(() -> new CustomException(CustomErrorCode.LICENSE_NOT_FOUND));
 
         if (playRecord.getScore() >= LicensePolicy.STANDARD_ACQUISITION_SCORE) {
-            if (playRecord.getKind().equals("bartender")) {
+            if (playRecord.getKind().equals(PlayRole.BARTENDER)) {
                 license.acquireBartender();
             }
-            if (playRecord.getKind().equals("baker")) {
+            if (playRecord.getKind().equals(PlayRole.BAKER)) {
                 license.acquireBaker();
             }
         }

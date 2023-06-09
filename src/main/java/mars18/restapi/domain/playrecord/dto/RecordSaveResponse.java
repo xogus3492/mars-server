@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
+import mars18.restapi.domain.playrecord.domain.PlayRole;
 
 @Getter
 @Builder
@@ -14,7 +15,7 @@ public class RecordSaveResponse {
     private String name;
     private int score;
     private String playing_time;
-    private String kind;
+    private PlayRole kind;
 
     public static RecordSaveResponse of(PlayRecord playRecord) {
         return RecordSaveResponse.builder()

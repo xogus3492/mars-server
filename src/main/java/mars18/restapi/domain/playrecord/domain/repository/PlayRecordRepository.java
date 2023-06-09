@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface PlayRecordRepository extends JpaRepository<PlayRecord, Long> {
     Optional<PlayRecord> findTopByNameOrderByIdDesc(String name);
+    List<PlayRecord> findAllByNameOrderByIdDesc(String name);
 
     //자격증 서비스
     Boolean existsByNameAndKindAndScoreGreaterThanEqual(String name, String kind, int n);

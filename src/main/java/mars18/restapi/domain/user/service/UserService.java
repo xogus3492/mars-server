@@ -1,16 +1,23 @@
 package mars18.restapi.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
+import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
 import mars18.restapi.domain.user.dto.CommonUserResponse;
 import mars18.restapi.domain.user.dto.LoginRequest;
+import mars18.restapi.domain.user.dto.MyRecordResponse;
 import mars18.restapi.domain.user.dto.SignUpRequest;
 import mars18.restapi.domain.user.domain.User;
+import mars18.restapi.global.common.dto.CommonRequest;
+import mars18.restapi.global.exception.CustomErrorCode;
 import mars18.restapi.global.exception.CustomException;
 import mars18.restapi.domain.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static mars18.restapi.global.exception.CustomErrorCode.*;
 
@@ -20,6 +27,7 @@ import static mars18.restapi.global.exception.CustomErrorCode.*;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PlayRecordRepository playRecordRepository;
     private final PasswordEncoder passwordEncoder;
 
     public CommonUserResponse Signup(SignUpRequest request) {
@@ -30,7 +38,7 @@ public class UserService {
         return CommonUserResponse.of(user);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CommonUserResponse login(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                         .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
@@ -38,6 +46,19 @@ public class UserService {
         loginValidation(user, request);
 
         return CommonUserResponse.of(user);
+    }
+
+    @Transactional(readOnly = true)
+    public List<MyRecordResponse> getMyRecord(CommonRequest request) {
+        User user = userRepository.findByName(request.getName())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        List<MyRecordResponse> responses = playRecordRepository.findAllByNameOrderByIdDesc(request.getName())
+                .stream()
+                .map(p -> MyRecordResponse.of(p))
+                .collect(Collectors.toList());
+
+        return responses;
     }
 
     // exception

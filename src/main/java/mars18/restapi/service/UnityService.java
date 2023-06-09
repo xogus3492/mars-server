@@ -31,7 +31,7 @@ public class UnityService {
                         .name(request.getName())
                         .score(request.getScore())
                         //.playingTime(request.getPlayingTime())
-                        .kind(request.getKind())
+                        //.kind(request.getKind())
                         .build()
         );
 
