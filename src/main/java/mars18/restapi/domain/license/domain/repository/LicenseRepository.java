@@ -10,6 +10,5 @@ import java.util.Optional;
 public interface LicenseRepository extends JpaRepository<License, Long> {
 
     Boolean existsByName(String name);
-
     Optional<License> findByName(String name);
 }

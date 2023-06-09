@@ -3,12 +3,8 @@ package mars18.restapi.domain.license.domain;
 import lombok.*;
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import mars18.restapi.global.common.BaseTimeEntity;
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Entity

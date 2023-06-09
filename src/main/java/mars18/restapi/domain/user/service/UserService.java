@@ -1,15 +1,12 @@
 package mars18.restapi.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
-import mars18.restapi.domain.license.domain.License;
 import mars18.restapi.domain.license.domain.repository.LicenseRepository;
-import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
 import mars18.restapi.domain.user.dto.*;
 import mars18.restapi.domain.user.domain.User;
 import mars18.restapi.global.common.dto.CommonRequest;
-import mars18.restapi.global.exception.CustomErrorCode;
-import mars18.restapi.global.exception.CustomException;
+import mars18.restapi.global.error.CustomException;
 import mars18.restapi.domain.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static mars18.restapi.global.exception.CustomErrorCode.*;
+import static mars18.restapi.global.error.CustomErrorCode.*;
 
 @Service
 @Transactional

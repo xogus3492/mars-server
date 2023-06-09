@@ -1,4 +1,4 @@
-package mars18.restapi.global.exception;
+package mars18.restapi.global.error;
 
 import lombok.Getter;
 

@@ -1,7 +1,6 @@
 package mars18.restapi.domain.playrecord.domain.repository;
 
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,12 +12,4 @@ public interface PlayRecordRepository extends JpaRepository<PlayRecord, Long> {
     Optional<PlayRecord> findTopByNameOrderByIdDesc(String name);
     List<PlayRecord> findAllByNameOrderByIdDesc(String name);
     List<PlayRecord> findAllByName(String name);
-
-    //자격증 서비스
-    Boolean existsByNameAndKindAndScoreGreaterThanEqual(String name, String kind, int n);
-
-     //앱 - 마이페이지 서비스
-    List<PlayRecord> findByNameOrderByScoreDesc(String name);
-    List<PlayRecord> findByName(String name);
-
 }

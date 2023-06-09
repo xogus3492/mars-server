@@ -2,11 +2,8 @@ package mars18.restapi.domain.playrecord.domain;
 
 import lombok.*;
 import mars18.restapi.global.common.BaseTimeEntity;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Entity

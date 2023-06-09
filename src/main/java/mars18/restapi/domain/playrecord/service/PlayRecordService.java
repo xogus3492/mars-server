@@ -7,8 +7,8 @@ import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import mars18.restapi.domain.playrecord.domain.PlayRole;
 import mars18.restapi.domain.playrecord.domain.repository.PlayRecordRepository;
 import mars18.restapi.domain.playrecord.dto.*;
-import mars18.restapi.global.exception.CustomErrorCode;
-import mars18.restapi.global.exception.CustomException;
+import mars18.restapi.global.error.CustomErrorCode;
+import mars18.restapi.global.error.CustomException;
 import mars18.restapi.global.policy.LicensePolicy;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -65,7 +63,7 @@ public class PlayRecordService {
     @Transactional(readOnly = true)
     public FeedbackReadResponse getFeedBack(FeedbackReadRequest request) {
         PlayRecord playRecord = playRecordRepository.findTopByNameOrderByIdDesc(request.getName())
-                .orElseThrow(() -> new CustomException(CustomErrorCode.NOT_EXISTS_USER_RECORD));
+                .orElseThrow(() -> new CustomException(CustomErrorCode.PLAY_RECORD_NOT_FOUND));
 
         return FeedbackReadResponse.of(playRecord);
     }

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import mars18.restapi.domain.playrecord.domain.PlayRecord;
 import mars18.restapi.domain.playrecord.domain.PlayRole;
-import mars18.restapi.domain.playrecord.dto.RankingResponse;
 
 import java.time.LocalDateTime;
 

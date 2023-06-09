@@ -7,9 +7,8 @@ import mars18.restapi.domain.license.dto.IsAcquiredLicenseResponse;
 import mars18.restapi.domain.user.domain.User;
 import mars18.restapi.domain.user.domain.repository.UserRepository;
 import mars18.restapi.global.common.dto.CommonRequest;
-import mars18.restapi.global.exception.CustomErrorCode;
-import mars18.restapi.global.exception.CustomException;
-import org.springframework.http.ResponseEntity;
+import mars18.restapi.global.error.CustomErrorCode;
+import mars18.restapi.global.error.CustomException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

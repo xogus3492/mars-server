@@ -1,4 +1,4 @@
-package mars18.restapi.global.exception;
+package mars18.restapi.global.error;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
-@RestControllerAdvice // 각 컨트롤러에 advice 역할을 하는 어노테이션, 빈 등록 포함
+@RestControllerAdvice
 public class CustomExceptionHandler {
 
     // 글로벌 예외처리
