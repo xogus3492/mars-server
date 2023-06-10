@@ -13,10 +13,17 @@ public class PlayRecord extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "play_record_id")
     private Long id;
+
+    @Column(length = 5, nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private int score;
+
+    @Column(nullable = false)
     private String playingTime;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private PlayRole kind;
 
     @Builder

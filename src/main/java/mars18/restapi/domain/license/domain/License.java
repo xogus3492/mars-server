@@ -14,8 +14,14 @@ public class License extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "license_id")
     private Long id;
+
+    @Column(length = 5, nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private Boolean bartender;
+
+    @Column(nullable = false)
     private Boolean baker;
 
     @Builder
