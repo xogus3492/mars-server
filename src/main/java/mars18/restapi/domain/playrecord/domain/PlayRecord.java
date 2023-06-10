@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class PlayRecord extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "play_record_id")
     private Long id;
     private String name;
     private int score;

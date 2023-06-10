@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class License extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "license_id")
     private Long id;
     private String name;
     private Boolean bartender;
