@@ -60,13 +60,4 @@ public class PlayRecordService {
         return responses;
     }
 
-    @Transactional(readOnly = true)
-    public FeedbackReadResponse getFeedBack(FeedbackReadRequest request) {
-        PlayRecord playRecord = playRecordRepository.findTopByNameOrderByIdDesc(request.getName())
-                .orElseThrow(() -> new CustomException(CustomErrorCode.PLAY_RECORD_NOT_FOUND));
-
-        return FeedbackReadResponse.of(playRecord);
-    }
-
-
 }

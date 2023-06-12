@@ -31,13 +31,4 @@ public class PlayRecordController {
 
         return ResponseEntity.ok(responses);
     }
-
-    @PostMapping("/feedback")
-    public ResponseEntity<FeedbackReadResponse> getFeedback(
-            @RequestBody @Valid final FeedbackReadRequest request
-    ) {
-        FeedbackReadResponse response = playRecordService.getFeedBack(request);
-
-        return ResponseEntity.ok(response);
-    }
 }
